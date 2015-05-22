@@ -36,15 +36,8 @@ public class ProcesoSAX {
 	         // Añadimos nuestro manejador al reader pasandole el objeto libro  
 	         reader.setContentHandler(libroXML);           
 	         // Procesamos el xml de ejemplo  
-	         reader.parse(new InputSource(new FileInputStream("libro.xml")));  
-	         
-	         Map <String, Libro> mi_hashmap_de_libros = new HashMap<String, Libro>();
-	         
-	         mi_hashmap_de_libros.put(libro.getIsbn(), libro);
-	         
-	         System.out.println(mi_hashmap_de_libros);
-	        
-	         
+	         reader.parse(new InputSource(new FileInputStream("libros.xml")));  
+	          
 	       // System.out.println(libro.toString());   
 	        
 	      } catch (SAXException e) {  
