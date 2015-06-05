@@ -144,7 +144,7 @@ public class ClaseLeeMails {
 	
 	public static void main(String[] args) throws IOException {
 		
-		String nombre = "C:\\Users\\alumno\\git\\Repositorio_Githun\\Repositorio_Github\\src\\Repositorio_Github_Ricardo\\fichero.txt";//el nombre del fichero de entrada
+		String nombre = "fichero.txt";//el nombre del fichero de entrada
 		String lista_mails = null; //aqu� guardar� los mails, separados por la el s�mbolo /
 		String [] array_mails = null; //aqu� guardaer los mails, cada uno en su posici�n!
 		BufferedReader br = null; // Objeto para leer un fichero de texto por l�neas!
