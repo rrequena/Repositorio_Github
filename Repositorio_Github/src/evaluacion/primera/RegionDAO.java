@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class RegionDAO {
 
@@ -21,7 +22,7 @@ public class RegionDAO {
 		
 		region = new RegionDTO(region_id, region_name);
 		
-		return region; // Creamos el objeto region
+		return region; // Creamos el objeto 
 	}
 	
 	public static List<RegionDTO> obtenerTodas () throws SQLException
@@ -57,27 +58,35 @@ public class RegionDAO {
 		return lista_regiones;
 		
 	}
-	public static List<RegionDTO> obtenerUnaRegion () throws SQLException
+	public static RegionDTO obtenerUnaRegion (int region_id) throws SQLException
 	{
-		List<RegionDTO> region_buscada = null;
+		RegionDTO region_buscada = null;
 		Connection conexion = null;
 		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		RegionDTO regionDTO = null;
+		Scanner sc = new Scanner(System.in);
+		
 		
 		
 		try {
 			
+			
 			conexion = Conexion.obtenerConexion(); // Inicio la conexión
 			stmt = conexion.createStatement();
-			rs = stmt.executeQuery(InstruccionesSQL.BUSCAR_REGION);
-			region_buscada = new ArrayList<RegionDTO>();
-		
+			
+			System.out.println("Introduce el ID de la región a buscar: ");
+			region_id = sc.nextInt();
+			
+			pstmt = conexion.prepareStatement(InstruccionesSQL.BUSCAR_REGION);
+			pstmt.setInt(1, region_id);
+			rs = pstmt.executeQuery();
+			
 			while (rs.next())
-			{	
-				regionDTO = componerObjeto(rs);
-				region_buscada.add(regionDTO); // Meto en un array la región buscada
-			}
+		
+			region_buscada = componerObjeto(rs);
+			conexion.commit(); // realizamos commit para que la consulta
+					// tenga efesto
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
